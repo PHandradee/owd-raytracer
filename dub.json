@@ -1,0 +1,10 @@
+{
+	"description": "Ray Tracing in One Weekend using D language",
+	"license": "MIT",
+	"authors": [
+		"pedro"
+	],
+	"copyright": "Copyright © 2026, pedro",
+	"name": "owd-raytracer",
+	"targetPath": "bin/${BUILD_TYPE}"
+}
