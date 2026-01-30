@@ -6,8 +6,7 @@ import vec3;
 import color;
 import ray;
 
-void main()
-{
+void main() {
 	//image 
 
 	auto aspect_ratio = 16.0 / 9.0;
@@ -39,11 +38,9 @@ void main()
 	stdout.writeln("P3");
 	stdout.writeln(image_width, ' ', image_height, "\n255");
 
-	for (int j = 0; j < image_height; j++)
-	{
+	for (int j = 0; j < image_height; j++) {
 		trace(true, "Scanlines remaining: ", (image_height - j));
-		for (int i = 0; i < image_width; i++)
-		{
+		for (int i = 0; i < image_width; i++) {
 			auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
 			auto ray_direction = pixel_center - camera_center;
 			Ray r = Ray(camera_center, ray_direction);
@@ -56,8 +53,7 @@ void main()
 	trace(true, "Done!");
 }
 
-Color ray_color(ref const Ray r)
-{
+Color ray_color(ref const Ray r) {
 	Vec3 unit_direction = unitVector(r.direction);
 	auto a = 0.5 * (unit_direction.y + 1.0);
 	return (1.0 - a) * Color(1, 1, 1) + a * Color(0.5, 0.7, 1.0);

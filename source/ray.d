@@ -2,32 +2,26 @@ module ray;
 
 import vec3;
 
-struct Ray
-{
+struct Ray {
 
-    this(ref const Point3 origin, ref const Vec3 direction)
-    {
+    this(ref const Point3 origin, ref const Vec3 direction) {
         m_origin = origin;
         m_direction = direction;
     }
 
-    @property origin() const
-    {
+    @property origin() const {
         return m_origin;
     }
 
-    @property direction() const
-    {
+    @property direction() const {
         return m_direction;
     }
 
-    Point3 at(double t) const
-    {
+    Point3 at(double t) const {
         return m_origin + t * m_direction;
     }
 
-    private
-    {
+    private {
         Point3 m_origin;
         Vec3 m_direction;
     }
