@@ -62,6 +62,23 @@ struct Vec3
             static assert(0, "Operator " ~ op ~ " not supported for Vec3");
     }
 
+    Vec3 opBinary(string op)(int rhs) {
+        static if (op == "+")
+            return Vec3(e[0] + rhs, e[1] + rhs, e[2] + rhs);
+        else static if (op == "-")
+            return Vec3(e[0] - rhs, e[1] - rhs, e[2] - rhs);
+        else static if (op == "*")
+            return Vec3(e[0] * rhs, e[1] * rhs, e[2] * rhs);
+        else static if (op == "/")
+            return Vec3(e[0] / rhs, e[1] / rhs, e[2] / rhs);
+        else
+            static assert(0, "Operator " ~ op ~ " not supported for Vec3");
+    }
+
+    auto opBinaryRight(string op : "*")(int rhs) {
+        return Vec3(rhs * e[0], rhs * e[1], rhs * e[2]);
+    }
+
     Vec3 opBinaryRight(string op, T)(T s) const
     if (op == "*" && isFloatingPoint!T)
     {
