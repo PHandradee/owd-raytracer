@@ -26,3 +26,6 @@ docs/
 
 # Code coverage
 *.lst
+
+# Output Image
+*.ppm

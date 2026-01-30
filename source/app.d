@@ -2,6 +2,9 @@ import std.stdio;
 import std.conv;
 import std.logger;
 
+import vec3;
+import color;
+
 void main()
 {
 	//image 
@@ -18,15 +21,10 @@ void main()
 	for (int j = 0; j < image_heigth; j++) {
 		trace(true,"Scanlines remaining: ", (image_heigth - j));
 		for (int i = 0; i < image_width; i++) {
-			immutable double r = to!double(i) / (image_width-1);
-			immutable double g = to!double(j) / (image_heigth-1);
-			immutable double b = 0.0; 
+			immutable Color pixel_color = Color(to!double(i)/(image_width-1)
+									,to!double(j)/(image_heigth-1),0);
+			write_color(pixel_color);
 
-			int ir = to!int(255.999 * r);
-			int ig = to!int(255.999 * g);
-			int ib = to!int(255.999 * b);
-
-			stdout.writeln(ir, ' ', ig, ' ', ib);
 		}
 	}
 	trace(true,"Done!");
