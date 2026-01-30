@@ -4,9 +4,6 @@ import vec3;
 
 struct Ray
 {
-    this()
-    {
-    }
 
     this(ref const Point3 origin, ref const Vec3 direction)
     {
