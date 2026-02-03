@@ -1,6 +1,7 @@
 import std.stdio;
 import std.conv;
 import std.logger;
+import std.math;
 
 import vec3;
 import color;
@@ -53,10 +54,12 @@ void main() {
 	trace(true, "Done!");
 }
 
-Color ray_color(ref const Ray r) {
+Color ray_color(const ref Ray r) {
 	Point3 sphere_center = Point3(0,0,-1);
-	if (hit_sphere(sphere_center, 0.5, r)) {
-		return Color(1, 0, 0);
+	immutable auto t = hit_sphere(sphere_center, 0.5, r);
+	if (t > 0.0) {
+		Vec3 n = unitVector(r.at(t) - Vec3(0,0,-1));
+		return 0.5 * Color(n.x + 1, n.y + 1, n.z + 1);
 	}
 
 	Vec3 unit_direction = unitVector(r.direction);
@@ -64,11 +67,16 @@ Color ray_color(ref const Ray r) {
 	return (1.0 - a) * Color(1, 1, 1) + a * Color(0.5, 0.7, 1.0);
 }
 
-bool hit_sphere(const ref Point3 center, double radius, const ref Ray r) {
+double hit_sphere(const ref Point3 center, double radius, const ref Ray r) {
 	Vec3 oc = center - r.origin;
 	immutable auto a = dot(r.direction, r.direction);
 	immutable auto b = -2.0 * dot(r.direction, oc);
 	immutable auto c = dot(oc, oc) - radius * radius;
 	immutable discriminant = b * b - 4 * a * c;
-	return (discriminant >= 0);
+	
+	if (discriminant < 0) {
+		return -1.0;
+	} else {
+		return (-b - sqrt(discriminant) / (2.0*a) );
+	}
 }
