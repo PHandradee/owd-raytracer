@@ -69,14 +69,14 @@ Color ray_color(const ref Ray r) {
 
 double hit_sphere(const ref Point3 center, double radius, const ref Ray r) {
 	Vec3 oc = center - r.origin;
-	immutable auto a = dot(r.direction, r.direction);
-	immutable auto b = -2.0 * dot(r.direction, oc);
-	immutable auto c = dot(oc, oc) - radius * radius;
-	immutable discriminant = b * b - 4 * a * c;
+	immutable auto a = r.direction.lengthSquared();
+	immutable auto h = dot(r.direction, oc);
+	immutable auto c = oc.lengthSquared() - radius * radius;
+	immutable discriminant = (h * h) - (a * c);
 	
 	if (discriminant < 0) {
 		return -1.0;
 	} else {
-		return (-b - sqrt(discriminant) / (2.0*a) );
+		return (h - sqrt(discriminant))/2;
 	}
 }
