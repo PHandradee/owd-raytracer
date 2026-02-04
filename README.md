@@ -72,10 +72,10 @@ All algorithmic concepts are credited to **Peter Shirley**. This project is an e
 
 ## 🧠 Project Status
 
-* [ ] Vectors and colors
-* [ ] Rays
-* [ ] Spheres
-* [ ] Multiple objects
+* [x] Vectors and colors
+* [x] Rays
+* [x] Spheres
+* [x] Multiple objects
 * [ ] Antialiasing
 * [ ] Diffuse materials
 * [ ] Metal and dielectric materials
