@@ -6,6 +6,10 @@ import std.math;
 import vec3;
 import color;
 import ray;
+import rtweekend;
+import hittable;
+import hittable_list;
+import sphere;
 
 void main() {
 	//image 
@@ -15,6 +19,12 @@ void main() {
 
 	int image_height = to!int(image_width / aspect_ratio);
 	image_height = (image_height < 1) ? 1 : image_height;
+
+	HittableList world = new HittableList();
+
+	world.add(new Sphere(Point3(0,0,-1),0.5));
+	world.add(new Sphere(Point3(0,-100.5,-1),100));
+
 
 	//Camera
 	auto focal_length = 1.0;
@@ -46,7 +56,7 @@ void main() {
 			auto ray_direction = pixel_center - camera_center;
 			Ray r = Ray(camera_center, ray_direction);
 
-			immutable Color pixel_color = ray_color(r);
+			immutable Color pixel_color = ray_color(r,world);
 			write_color(pixel_color);
 
 		}
@@ -54,12 +64,10 @@ void main() {
 	trace(true, "Done!");
 }
 
-Color ray_color(const ref Ray r) {
-	Point3 sphere_center = Point3(0,0,-1);
-	immutable auto t = hit_sphere(sphere_center, 0.5, r);
-	if (t > 0.0) {
-		Vec3 n = unitVector(r.at(t) - Vec3(0,0,-1));
-		return 0.5 * Color(n.x + 1, n.y + 1, n.z + 1);
+Color ray_color(const ref Ray r, const ref HittableList world) {
+	HitRecord rec;
+	if (world.hit(r,0,INFINITY,rec)) {
+		return 0.5 * (rec.normal + Color(1,1,1));
 	}
 
 	Vec3 unit_direction = unitVector(r.direction);

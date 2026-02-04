@@ -3,6 +3,7 @@ module sphere;
 import hittable;
 import vec3;
 import std.math;
+import ray;
 
 class Sphere : Hittable {
     private {
@@ -15,7 +16,7 @@ class Sphere : Hittable {
         this.radius = std.math.fmax(0, radius);
     }
 
-    override bool hit(const ref Ray ray, double ray_tmin, double ray_tmax, ref HitRecord rec) const {
+    override bool hit(const ref Ray r, double ray_tmin, double ray_tmax, ref HitRecord rec) const {
         immutable Vec3 oc = center - r.origin;
         immutable auto a = r.direction().lengthSquared();
         immutable auto h = dot(r.direction(), oc);
@@ -28,7 +29,7 @@ class Sphere : Hittable {
 
         immutable auto sqrtd = std.math.sqrt(discriminant);
 
-        root = (h - sqrtd) / a;
+        double root = (h - sqrtd) / a;
         if ((root <= ray_tmin) || (ray_tmax <= root)) {
             root = (h + sqrtd) / a;
             if ((root <= ray_tmin) || (ray_tmax <= root)) {
