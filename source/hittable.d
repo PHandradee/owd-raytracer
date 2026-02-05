@@ -2,6 +2,7 @@ module hittable;
 
 import ray;
 import vec3;
+import interval;
 
 struct HitRecord {
     Point3 p;
@@ -17,5 +18,5 @@ struct HitRecord {
 }
 
 interface Hittable {
-    bool hit(const ref Ray ray, double ray_tmin, double ray_tmax, ref HitRecord rec) const;
+    bool hit(const ref Ray ray, Interval ray_t, ref HitRecord rec) const;
 }

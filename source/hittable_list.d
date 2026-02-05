@@ -4,6 +4,7 @@ import hittable;
 import std.range;
 import std.algorithm;
 import ray;
+import interval;
 
 class HittableList : Hittable {
     Hittable[] objects;
@@ -16,13 +17,13 @@ class HittableList : Hittable {
         objects ~= object;
     }
 
-    bool hit(const ref Ray ray, double ray_tmin, double ray_tmax, ref HitRecord rec) const {
+    bool hit(const ref Ray ray, Interval ray_t, ref HitRecord rec) const{
         HitRecord temp_rec;
         bool hit_anything = false;
-        auto closest_so_far = ray_tmax;
+        auto closest_so_far = ray_t.max;
 
         foreach (const Hittable object; objects) {
-            if (object.hit(ray, ray_tmin, closest_so_far, temp_rec)) {
+            if (object.hit(ray, Interval(ray_t.min,closest_so_far), temp_rec)) {
                 hit_anything = true;
                 closest_so_far = temp_rec.t;
                 rec = temp_rec;

@@ -10,6 +10,7 @@ import rtweekend;
 import hittable;
 import hittable_list;
 import sphere;
+import interval;
 
 void main() {
 	//image 
@@ -66,7 +67,7 @@ void main() {
 
 Color ray_color(const ref Ray r, const ref HittableList world) {
 	HitRecord rec;
-	if (world.hit(r,0,INFINITY,rec)) {
+	if (world.hit(r,Interval(0,INFINITY),rec)) {
 		return 0.5 * (rec.normal + Color(1,1,1));
 	}
 
