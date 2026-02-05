@@ -76,10 +76,10 @@ All algorithmic concepts are credited to **Peter Shirley**. This project is an e
 * [x] Rays
 * [x] Spheres
 * [x] Multiple objects
+* [x] Camera
 * [ ] Antialiasing
 * [ ] Diffuse materials
 * [ ] Metal and dielectric materials
-* [ ] Camera and depth of field
 
 > Items will be checked as chapters are completed.
 
