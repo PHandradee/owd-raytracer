@@ -77,7 +77,7 @@ All algorithmic concepts are credited to **Peter Shirley**. This project is an e
 * [x] Spheres
 * [x] Multiple objects
 * [x] Camera
-* [ ] Antialiasing
+* [x] Antialiasing
 * [ ] Diffuse materials
 * [ ] Metal and dielectric materials
 
