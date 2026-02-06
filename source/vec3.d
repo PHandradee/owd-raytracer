@@ -13,6 +13,10 @@ struct Vec3 {
         e[2] = z;
     }
 
+    this(Vec3 vec) {
+        this.e = vec.e.dup;
+    }
+
     @property double x() const {
         return e[0];
     }
